@@ -57,3 +57,76 @@ Array.prototype.anwar_reduce = function(fn,acc){
 
 const result6 = arr1.anwar_reduce(sum,5);
 console.log(result6);
+
+// Pure function
+
+let arr3 = [1,2,3,4,5];
+
+// Impure function - because it cause side effect to arr3
+function addElement(array,value){
+    array.push(value);
+    return array;
+}
+
+console.log(addElement(arr3,10));
+console.log(arr3);
+
+// Impure Function example - because it returns different output on same arguments each time
+function add(a,b){
+    return Math.random()+a+b;
+}
+
+console.log(add(2,2));
+console.log(add(2,2));
+
+// Pure function - it not cause any side effect to global variable
+function addValue(array,value){
+    return [...array,value];
+}
+
+console.log(addValue(arr3,50));
+console.log(arr3);
+
+function counter(){
+    let counter = 0;
+    console.log({counter});
+    const add = (value)=>{
+        console.log({counter,value})
+        counter += value;
+        return counter;
+    }    
+    return add;
+}
+
+
+let counter1 = counter();
+let counter2 = counter();
+
+console.log(counter1(5));
+console.log(counter2(10));
+console.log(counter1(1));
+console.log(counter2(1));
+
+/*
+add(5) // 5
+add(5)(2) // 7
+add(3)(1)(3)(2) // 9
+add(5)(10)(15)(0)(2)(3) // 35
+*/
+
+/*
+add(5)() // 5
+add(5)(2)() // 7
+add(3)(1)(3)(2)() // 9
+add(5)(10)(15)(0)(2)(3)() // 35
+*/
+
+function add(num1){
+    console.log({num1})
+    return function(num2){
+        console.log({num1,num2})
+        return num1+num2;
+    };
+}
+
+console.log(add(5)(5));
