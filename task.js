@@ -114,18 +114,9 @@ add(3)(1)(3)(2) // 9
 add(5)(10)(15)(0)(2)(3) // 35
 */
 
-/*
-add(5)() // 5
-add(5)(2)() // 7
-add(3)(1)(3)(2)() // 9
-add(5)(10)(15)(0)(2)(3)() // 35
-*/
-
 function add(num1){
     return function(num2){
-        if(num2 || num2===0){
-            return add(num1+num2);
-        }
+        if(num2 || num2===0) return add(num1+num2);
         return num1;
     };
 }
@@ -134,3 +125,22 @@ console.log(add(5)());
 console.log(add(5)(2)());
 console.log(add(3)(1)(3)(2)());
 console.log(add(5)(10)(15)(0)(2)(3)());
+
+/*
+add(5)() // 5
+add(5)(2)() // 7
+add(3)(1)(3)(2)() // 9
+add(5)(10)(15)(0)(2)(3)() // 35
+*/
+
+function curriedSum(num1){
+    return function(num2){
+        if(num2) return curriedSum(num1+num2);
+        return num1;
+    };
+}
+
+console.log(curriedSum(5));
+console.log(curriedSum(5)(2));
+console.log(curriedSum(3)(1)(3)(2));
+// console.log(curriedSum(5)(10)(15)(0)(2)(3));
