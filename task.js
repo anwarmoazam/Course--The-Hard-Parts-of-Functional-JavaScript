@@ -135,12 +135,14 @@ add(5)(10)(15)(0)(2)(3)() // 35
 
 function curriedSum(num1){
     return function(num2){
-        if(num2) return curriedSum(num1+num2);
+        console.log({num1,num2})
+        if(!num2) return curriedSum(num1+num2);
+        console.log({num1,num2})
         return num1;
     };
 }
 
 console.log(curriedSum(5));
-console.log(curriedSum(5)(2));
-console.log(curriedSum(3)(1)(3)(2));
+console.log(curriedSum(5)(4));
+// console.log(curriedSum(3)(1)(3)(2));
 // console.log(curriedSum(5)(10)(15)(0)(2)(3));
